@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- 配置用户操作Action -->
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="home">/jsp/home/index.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		<!-- 配置流程定义管理Action -->
+		<action name="processDefinitionAction_*" class="processDefinitionAction"
+			method="{1}">
+			<result name="list">/jsp/processDefinition/list.jsp</result>
+			<result name="toList" type="redirectAction">
+				processDefinitionAction_list
+			</result>
+			<result name="deployUI">/jsp/processDefinition/deployUI.jsp</result>
+			<result name="showImg" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">imgStream</param>
+			</result>
+		</action>
+		<!-- 配置模板管理Action -->
+		<action name="templateAction_*" class="templateAction" method="{1}">
+			<result name="list">/jsp/template/list.jsp</result>
+			<result name="toList" type="redirectAction">
+				templateAction_list
+			</result>
+			<result name="saveUI">/jsp/template/saveUI.jsp</result>
+			<result name="download" type="stream">
+				<param name="inputName">docStream</param>
+				<!-- 配置以附件的形式下载 -->
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result>
+			<result name="updateUI">/jsp/template/updateUI.jsp</result>
+		</action>
+		<!-- 流程管理Action -->
+		<action name="flowAction_*" class="flowAction" method="{1}">
+			<result name="templateList">/jsp/flow/templateList.jsp</result>
+			<result name="submitUI">/jsp/flow/submitUI.jsp</result>
+			<result name="toTemplateList" type="redirectAction">
+				flowAction_templateList
+			</result>
+			<result name="myApplicationList">/jsp/flow/myApplicationList.jsp</result>
+			<result name="img">/jsp/flow/image.jsp</result>
+			<result name="viewImage" type="stream">
+				<param name="contentType">image/png</param>
+				<param name="inputName">imgStream</param>
+			</result>
+			<result name="download" type="stream">
+				<param name="inputName">docStream</param>
+				<!-- 配置以附件的形式下载 -->
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			</result>
+			<result name="approveInfos">/jsp/flow/approveInfos.jsp</result>
+			<result name="myTaskList">/jsp/flow/myTaskList.jsp</result>
+			<result name="approveUI">/jsp/flow/approveUI.jsp</result>
+			<result name="toList" type="redirectAction">
+				flowAction_myTaskList
+			</result>
+		</action>
+	</package>
+</struts>

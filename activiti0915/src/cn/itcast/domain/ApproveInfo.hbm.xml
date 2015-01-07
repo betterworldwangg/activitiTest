@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.domain.ApproveInfo" table="itcast_approveinfo">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="approveDate"/>
+		<property name="approval"/>
+		<property name="comment" />
+		<many-to-one name="approver" class="cn.itcast.domain.User" column="user_id"/>
+		<many-to-one name="application" class="cn.itcast.domain.Application" column="application_id"/>
+	</class>
+</hibernate-mapping>
